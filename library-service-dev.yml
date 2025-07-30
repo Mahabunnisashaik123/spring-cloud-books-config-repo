@@ -42,11 +42,17 @@ spring:
 
   thymeleaf:
     cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+
+  messages:
+    basename: messages
 
   zipkin:
-    base-url: http://localhost:9411
-    sender:
-      type: web
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
 
   config:
     import: optional:configserver:http://localhost:8888
@@ -59,6 +65,8 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
 
 resilience4j:
   circuitbreaker:
@@ -68,13 +76,11 @@ resilience4j:
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 2
-
   retry:
     instances:
       inventoryService:
         maxAttempts: 3
         waitDuration: 2s
-
   timelimiter:
     instances:
       inventoryService:
@@ -89,9 +95,20 @@ management:
       exposure:
         include: "*"
 
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+
 logging:
   level:
     root: INFO
     com.microservices.library: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
 
 message: "Hello from Config Server for LibraryService"
