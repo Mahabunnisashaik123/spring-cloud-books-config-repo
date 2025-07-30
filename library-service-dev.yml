@@ -47,9 +47,6 @@ spring:
     mode: HTML
     encoding: UTF-8
 
-  messages:
-    basename: messages
-
   zipkin:
     tracing:
       endpoint: http://localhost:9411/api/v2/spans
