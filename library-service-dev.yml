@@ -68,8 +68,10 @@ resilience4j:
       inventoryService:
         slidingWindowSize: 5
         failureRateThreshold: 50
-        waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 2
+        waitIntervalFunctionInOpenState:
+          interval: 10s
+
   retry:
     instances:
       inventoryService:
