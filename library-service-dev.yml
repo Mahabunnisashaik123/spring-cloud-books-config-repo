@@ -66,12 +66,13 @@ resilience4j:
   circuitbreaker:
     instances:
       inventoryService:
+        registerHealthIndicator: true
         slidingWindowSize: 5
+        minimumNumberOfCalls: 5
         failureRateThreshold: 50
+        waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 2
-        waitIntervalFunctionInOpenState:
-          interval: 10s
-
+        
   retry:
     instances:
       inventoryService:
