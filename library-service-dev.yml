@@ -28,6 +28,17 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+api:
+  response:
+    request-success: "Request processed successfully"
+    resource-created: "Resource created successfully"
+    resource-updated: "Resource updated successfully"
+    resource-deleted: "Resource deleted successfully"
+    resource-patched: "Resource patched successfully"
+    search-completed: "Search completed successfully"
+    inventory-products-retrieved: "Inventory products retrieved successfully"
+
+
   mail:
     host: smtp.gmail.com
     port: 587
